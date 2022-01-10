@@ -1,9 +1,11 @@
 from django.shortcuts import render
 
 # Create your views here.
-from . serializers import articleserializer,courseserializer,testimonialsserializer,blogsserializer,aboutusserializer,queryserializer,videoserializer
-from . models import article,about_us,testimonials,query,course,videos,blogs
+from . serializers import teamserializer,articleserializer,courseserializer,testimonialsserializer,blogsserializer,aboutusserializer,queryserializer,videoserializer
+from . models import article,about_us,testimonials,query,course,videos,blogs,team
 from rest_framework import mixins,generics
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 class list_article(generics.GenericAPIView,mixins.CreateModelMixin,mixins.ListModelMixin):
     serializer_class=articleserializer
@@ -61,3 +63,16 @@ class list_blogs(generics.GenericAPIView,mixins.CreateModelMixin,mixins.ListMode
 
     def get(self,request):
         return self.list(request)
+
+class list_teams(generics.GenericAPIView,APIView,mixins.CreateModelMixin,mixins.ListModelMixin):
+    serializer_class=teamserializer
+    queryset=team.objects.all()
+
+    def get(self,request):
+        social_list=[]
+        team_data=team.objects.all()
+        serializer=teamserializer(team_data,many=True)
+        print(serializer.data,'lllll')
+
+         
+        return Response (serializer.data)

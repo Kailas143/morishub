@@ -7,5 +7,7 @@ urlpatterns = [
     path('add/query/',views.add_query.as_view()),
     path('courses/',views.list_course.as_view()),
     path('videos/',views.list_videos.as_view()),
-    path('blogs/',views.list_blogs.as_view())
+    path('blogs/',views.list_blogs.as_view()),
+    path('teams/',views.list_teams.as_view())
+
 ]

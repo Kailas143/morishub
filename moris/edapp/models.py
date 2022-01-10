@@ -1,6 +1,31 @@
 from django.db import models
 from phone_field import PhoneField
 # Create your models here.
+
+class social_media(models.Model):
+    name=models.CharField(max_length=1054)
+    pic=models.ImageField(upload_to='icons/')
+
+    def __str__(self):
+        return self.name
+
+    
+class team(models.Model):
+    pic=models.ImageField(upload_to='teams/')
+    name=models.CharField(max_length=1024)
+    title=models.CharField(max_length=1024)
+    description=models.CharField(max_length=1024)
+    fb=models.ForeignKey(social_media,related_name="Facebook",verbose_name="Facebook",on_delete=models.CASCADE,null=True)
+    fb_link=models.URLField(max_length=1000,null=True)
+    linkdin_link=models.URLField(max_length=1000,null=True)
+    twitt_link=models.URLField(max_length=1000,null=True)
+    linkdin=models.ForeignKey(social_media,related_name="Linkdin",verbose_name="Linkdin",on_delete=models.CASCADE,null=True)
+    twitter=models.ForeignKey(social_media,related_name='Twitter',verbose_name="Twitter", on_delete=models.CASCADE,null=True)
+
+    def __str__(self):
+        return self.name
+    
+
 class about_us(models.Model):
     content=models.CharField(max_length=1024)
     first_address=models.CharField(max_length=1024)

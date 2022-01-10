@@ -20,3 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('edapp.urls'))
 ]
+admin.site.site_header  =  "Administration"  
+admin.site.site_title  =  "Moris"
+admin.site.index_title  =  "Admin"

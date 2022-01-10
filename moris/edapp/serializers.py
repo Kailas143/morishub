@@ -1,6 +1,16 @@
 from rest_framework import serializers
-from . models import query,article,about_us,course,testimonials,videos,blogs
+from . models import query,article,about_us,course,testimonials,videos,blogs,team,social_media
+from drf_writable_nested.serializers import WritableNestedModelSerializer
 
+
+class social_mediaserializer(serializers.ModelSerializer):
+    class Meta :
+        model=social_media
+        fields='__all__'
+# class teamserializer(serializers.ModelSerializer):
+#     class Meta :
+#         model=team 
+#         fields='__all__'
 
 class queryserializer(serializers.ModelSerializer):
     class Meta :
@@ -38,4 +48,12 @@ class videoserializer(serializers.ModelSerializer):
 class courseserializer(serializers.ModelSerializer):
     class Meta :
         model=course
+        fields='__all__'
+
+class teamserializer(serializers.ModelSerializer):
+    fb=social_mediaserializer()
+    linkdin=social_mediaserializer()
+    twitter=social_mediaserializer()
+    class Meta :
+        model=team 
         fields='__all__'
